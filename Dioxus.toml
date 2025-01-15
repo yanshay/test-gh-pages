@@ -1,0 +1,26 @@
+[application]
+out_dir = "docs"
+
+# App (Project) Name
+name = "test-gh-pages"
+
+[web.app]
+base_path = "test-gh-pages"
+
+# HTML title tag content
+title = "test-gh-pages"
+
+# include `assets` in web platform
+[web.resource]
+
+# Additional CSS style files
+style = []
+
+# Additional JavaScript files
+script = []
+
+[web.resource.dev]
+
+# Javascript code file
+# serve: [dev-server] only
+script = []
