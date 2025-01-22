@@ -1,4 +1,4 @@
 filename = "app-firmware.bin"
 crc32 = "c369375b"
-ver = "0.1.0"
+ver = "0.1.1"
 filesize = 2683328 
