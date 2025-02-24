@@ -8,6 +8,8 @@ enum Route {
     Home {},
     #[route("/blog/:id")]
     Blog { id: i32 },
+    #[route("/V1?:ID&:M&:C&:NN&:NX&:K2&:K4&:K6&:K8")]
+    FilamentInfo { ID: String, M: String, C: String, NN: i32, NX: i32, K2: String, K4:String, K6: String, K8: String},
 }
 
 const FAVICON: Asset = asset!("/assets/favicon.ico");
@@ -16,6 +18,24 @@ const HEADER_SVG: Asset = asset!("/assets/header.svg");
 
 fn main() {
     dioxus::launch(App);
+}
+
+#[component]
+pub fn FilamentInfo(ID: String, M: String, C: String, NN: i32, NX: i32, K2: String, K4:String, K6: String, K8: String) -> Element {
+    print!("In filamentInfo");
+    rsx! {
+        div {
+            p { "Tag-ID: {ID}" }
+            p { "Material: {M}" }
+            p { "Color: {C}" }
+            p { "Min Nozzle Temp {NN}" }
+            p { "Max Nozzle Temp {NX}" }
+            p { "K2 #{K2}" }
+            p { "K4 #{K4}" }
+            p { "K6 #{K6}" }
+            p { "K8 #{K8}" }
+        }
+    }
 }
 
 #[component]

@@ -1,5 +1,5 @@
 [application]
-out_dir = "docs"
+out_dir = "bundle"
 
 # App (Project) Name
 name = "test-gh-pages"
