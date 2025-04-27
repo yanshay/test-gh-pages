@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QR Scanner</title>
+  <script src="https://unpkg.com/jsqr"></script>
+  <style>
+    body { margin: 0; }
+    video { width: 100vw; height: 100vh; object-fit: cover; }
+  </style>
+</head>
+<body>
+  <video id="video" autoplay muted playsinline></video>
+  <script>
+    const video = document.getElementById('video');
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+      .then(stream => {
+        video.srcObject = stream;
+        video.playsInline = true; // important for iOS
+        video.muted = true;
+        video.play();
+        requestAnimationFrame(scanFrame);
+      })
+      .catch(err => console.error('Camera access error:', err));
+
+    function scanFrame() {
+      if (video.readyState === video.HAVE_ENOUGH_DATA) {
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        const code = jsQR(imageData.data, canvas.width, canvas.height);
+        if (code) {
+          console.log('QR Code:', code.data);
+          alert('QR Code: ' + code.data);
+          return; // stop scanning
+        }
+      }
+      requestAnimationFrame(scanFrame);
+    }
+  </script>
+</body>
+</html>
